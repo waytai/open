@@ -11,11 +11,16 @@ int main()
 {
     printf("hello world\n");
     int a;
-    a = 4;
+    a = 9;
     if(a == 4)
     {
         printf("a is %d\n", a);
 
         }
+    else
+    {
+        a = 5;
+        }
+    printf("after a is %d\n", a);
     return 0;
 }

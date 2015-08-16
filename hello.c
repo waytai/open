@@ -12,7 +12,7 @@ int main()
     printf("hello world\n");
     int a;
     a = 4;
-    if(a = = 4)
+    if(a == 4)
     {
         printf("a is %d\n", a);
 

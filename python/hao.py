@@ -34,3 +34,14 @@ print Foo
 
 Foo = type('Foo', (), {'bar':True})
 print Foo
+
+#以下两个等同
+class FooChild(Foo):
+    pass
+
+print FooChild
+
+FooChild = type('FooChild', (Foo,) ,{})
+
+
+print FooChild

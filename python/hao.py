@@ -18,3 +18,19 @@ def choose_class(name):
 
 MyClass = choose_class('foo')
 print MyClass              
+
+
+class ObjectCreator(object):
+    pass
+print type(ObjectCreator)
+print type(ObjectCreator())
+
+
+
+#以下两个等同
+class Foo(object):
+    bar = True
+print Foo
+
+Foo = type('Foo', (), {'bar':True})
+print Foo

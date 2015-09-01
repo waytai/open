@@ -7,5 +7,8 @@
 #########################################################################
 #!/bin/python
 import os
+import pprint
 print os.name
 print os.uname()
+pprint.pprint(os.environ)
+print os.getenv('PATH')

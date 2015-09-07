@@ -8,4 +8,10 @@ class Student(object):
         print "*"*20
         return 'Student object str (name: %s)' % self.name
 
+    def __call__(self):
+        print "my name is __call__"
+
 print Student('liu')
+
+s = Student("how are you")
+s()

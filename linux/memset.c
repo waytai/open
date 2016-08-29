@@ -12,7 +12,7 @@ int main()
 {
     char *s;
     s = malloc(sizeof(char)*30);
-    printf("sizeof s is %d\n", sizeof(s));
+    printf("sizeof s is %lu\n", sizeof(s));
     memset(s, 'A', 30);
     printf("%s\n", s);
     return 0;

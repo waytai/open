@@ -9,3 +9,7 @@ print f('seal/for')
 
 tf = lambda y: 'test'
 print tf('sss')
+
+
+f = lambda x: 'test' if 'dev' in x or 'seal' in x or 'test' in x else 'main'
+print f('ttt')

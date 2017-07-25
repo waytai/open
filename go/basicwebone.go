@@ -13,7 +13,7 @@ func Hello(response http.ResponseWriter, request *http.Request) {
 
 	liumiaocn := person{Id: 1001, Name: "liumiaocn", Country: "China"}
 
-	tmpl, err := template.ParseFiles("./test.html")
+	tmpl, err := template.ParseFiles("test.html")
 	if err != nil {
 		fmt.Println("Error happened..")
 	}

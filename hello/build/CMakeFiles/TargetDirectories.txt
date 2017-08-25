@@ -1,0 +1,1 @@
+/home/wayne/test/hello/build/CMakeFiles/hello.dir

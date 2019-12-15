@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	logfile, err := os.OpenFile("/Users/cybercare/tmp/test.log", os.O_RDWR|os.O_CREATE, 0666)
+	logfile, err := os.OpenFile("/tmp/test.log", os.O_RDWR|os.O_CREATE, 0666)
 	if err != nil {
 		fmt.Printf("%s\r\n", err.Error())
 		os.Exit(-1)

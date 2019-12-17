@@ -48,12 +48,13 @@ int insert_list_ele(lnd l, int n, int e){
 }
 
 int delete_list_ele(lnd l, int n){
-    lnd p;
-    while(n--){
+    lnd p,q;
+    while(--n){
         l = l->next;
     }
-    p = l;
-    p->next = l->next->next;
+    q = l;
+    p = l->next;
+    q->next = p->next;
     free(p);
     return 0;
 }

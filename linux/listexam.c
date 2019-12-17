@@ -59,15 +59,29 @@ int delete_list_ele(lnd l, int n){
     return 0;
 }
 
-//lnd empity_list(lnd l){
-//    lnd p;
-//    p = l;
-//    while(l){
-//        l = l->next;
-//        free(l);
-//    }
-//    return p;
-//}
+lnd destory_list(lnd l){
+    lnd p;
+    while(l){
+        p = l->next;
+        free(l);
+        l = p;
+    }
+    return l;
+}
+
+lnd clear_list(lnd l){
+    lnd p,q;
+    p = l->next;
+    while(p!=NULL){
+        q = p ->next;
+        free(p);
+        p = q;
+    }
+    l->next =NULL;
+    return l;
+
+}
+
 
 int print_list(lnd l){
     while(l){
@@ -90,8 +104,8 @@ int main(){
     delete_list_ele(lst, 2);
     print_list(lst);
 
-    //printf("清空后数据\n");
-    //lnd em = empity_list(lst);
-    //print_list(em);
+    printf("清空后数据\n");
+    lnd em = clear_list(lst);
+    print_list(em);
 }
 

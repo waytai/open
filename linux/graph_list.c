@@ -39,6 +39,59 @@ void link_to_last(PArcNode list, PArcNode pnode){
    p->next_arc = pnode;
 }
 
+
+void print_graph(PGraph pgraph){
+     for(int i = 0; i<pgraph->vernum; i++){
+        printf("%c ", pgraph->vnode_list[i].data);
+        PArcNode p_arc;
+        p_arc = pgraph->vnode_list[i].first_arc;
+        while(p_arc != NULL){
+            printf("%d %c  ", p_arc->vernum, pgraph->vnode_list[p_arc->vernum].data);
+            p_arc = p_arc->next_arc;
+        }
+        printf("\n");
+    }
+}
+
+static void DFS(PGraph G, int i, int *visited)
+{
+    PArcNode node;
+
+    visited[i] = 1;
+    printf("%c ", G->vnode_list[i].data);
+    node = G->vnode_list[i].first_arc;
+    while (node != NULL)
+    {
+        if (!visited[node->vernum])
+            DFS(G, node->vernum, visited);
+        node = node->next_arc;
+    }
+}
+
+/*
+ * 深度优先搜索遍历图
+ */
+void DFSTraverse(PGraph G)
+{
+    int i;
+    int visited[VNODENUM];       // 顶点访问标记
+
+    // 初始化所有顶点都没有被访问
+    for (i = 0; i < G->vernum; i++)
+        visited[i] = 0;
+
+    printf("DFS: ");
+    for (i = 0; i < G->vernum; i++)
+    {
+        if (!visited[i])
+            DFS(G, i, visited);
+    }
+    printf("\n");
+}
+
+
+
+
 int main(){
     char A[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G'};
     char edge[][2] ={
@@ -102,16 +155,11 @@ int main(){
     }
     printf("\n");
 
-    for(int i = 0; i<pgraph->vernum; i++){
-        printf("%c ", pgraph->vnode_list[i].data);
-        PArcNode p_arc;
-        p_arc = pgraph->vnode_list[i].first_arc;
-        while(p_arc != NULL){
-            printf("%d %c  ", p_arc->vernum, pgraph->vnode_list[p_arc->vernum].data);
-            p_arc = p_arc->next_arc;
-        }
-        printf("\n");
-    }
+    print_graph(pgraph);
+
+    printf("=========\n");
+    DFSTraverse(pgraph);
+
     return 0;
 }
 

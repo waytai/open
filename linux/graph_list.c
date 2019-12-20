@@ -53,7 +53,7 @@ void print_graph(PGraph pgraph){
     }
 }
 
-static void DFS(PGraph G, int i, int *visited)
+void DFS(PGraph G, int i, int *visited)
 {
     PArcNode node;
 
@@ -66,6 +66,43 @@ static void DFS(PGraph G, int i, int *visited)
             DFS(G, node->vernum, visited);
         node = node->next_arc;
     }
+}
+
+void BFS(PGraph G){
+    int head = 0;
+    int rear = 0;
+    int queue[VNODENUM];
+    int visited[VNODENUM];
+    int i,j,k;
+    PArcNode parcnode;
+
+    for(i=0; i<G->vernum; i++){
+        visited[i] = 0;
+    }
+
+    printf("BFS:");
+    for(i=0; i<G->vernum;i++){
+        if(!visited[i]){
+            visited[i] = 1;
+            printf(" ---- %c 9 ", G->vnode_list[i].data);
+            queue[rear++] = i;
+        }
+        while(head != rear){
+            j = queue[head++];
+            parcnode = G->vnode_list[j].first_arc;
+            while(parcnode != NULL){
+                k = parcnode->vernum;
+                if(!visited[k]){
+                    visited[k] = 1;
+                    printf("%c ", G->vnode_list[k].data);
+                    queue[rear++] = k;
+                }
+                parcnode = parcnode->next_arc;
+            }
+        }
+    }
+
+    printf("\n");
 }
 
 /*
@@ -158,7 +195,8 @@ int main(){
     print_graph(pgraph);
 
     printf("=========\n");
-    DFSTraverse(pgraph);
+    //DFSTraverse(pgraph);
+    BFS(pgraph);
 
     return 0;
 }

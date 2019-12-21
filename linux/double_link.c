@@ -51,6 +51,24 @@ void print_list(PPerson ps){
     printf("\n");
 }
 
+//利用双指针法做
+//
+
+void print_list_double_point(PPerson ps){
+    PPerson s1, s2;
+    s1 = ps->next;
+    s2 = ps->next->next;
+
+    while(s1 != s2){
+        printf("%d ", s1->age);
+        printf("%s \n", s1->name);
+        s1 = s1->next;
+        s2 = s2->next->next;
+    }
+
+}
+
+
 void print_list2(PPerson ps){
     PPerson p;
     printf("===============\n");
@@ -71,7 +89,7 @@ int main(){
     printf("%d  ", ps1->age);
     printf("%s -----\n", ps1->name);
 
-    for(int i=0; i<5; i++){
+    for(int i=0; i<10; i++){
         pps = (PPerson)malloc(sizeof(Person));
         pps->age = (i+1)*10;
         sprintf(pps->name, "name%d", i+1);
@@ -81,7 +99,10 @@ int main(){
     print_list(ps1);
 
     PPerson ps2 = del_node(ps1);
-    print_list(ps2);
+    printf("======\n");
+    print_list(ps2);    
+    printf("===========\n");
+    print_list_double_point(ps2);
     //print_list2(ps2);
     return 0;
 }

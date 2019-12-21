@@ -32,32 +32,50 @@ void preoder_tree(BSTree tree){
 
 }
 
-void insert_bstree_test(BSTree tree, int key_value){
-    Node *x, *y;
-    x = tree;
-    y = (Node*)malloc(sizeof(Node));
-    y->key = key_value;
-    y->left = y->right = NULL;
-    int flag;
-    while(x->left != NULL && x->right != NULL){
-        if(key_value > x->key){
-            x = x->right;
-            flag = 0;
-        }
-        else{
-            x = x->left;
-            flag = 1;
-        }
-    }
 
-    if(flag){
-        x->left->key = key_value;
+BSTree insert_bstree_recursion(BSTree tree, int key_value){
+    if(tree == NULL){
+        tree = (Node*)malloc(sizeof(Node));
+        tree->key = key_value;
+        tree->left = tree->right = NULL;
+        return tree;
+    }
+    if(key_value > tree->key){
+        tree->right = insert_bstree_recursion(tree->right, key_value);
     }
     else{
-    x->right->key = key_value;
+        tree->left = insert_bstree_recursion(tree->left, key_value);
     }
 
-    x->left = x->right = NULL;
+}
+
+void insert_bstree_test(BSTree tree, int key_value){
+    Node *parent, *head, *p;
+    head = tree;
+    p = (Node*)malloc(sizeof(Node));
+    p->key = key_value;
+    p->left = p->right = NULL;
+    while(head){
+        parent = head;
+        if(key_value > head->key){
+            printf("insert right and value is %d\n", parent->key);
+            head = head->right;
+        }
+        else{
+            printf("insert left and value is %d\n", parent->key);
+            head = head->left;
+        }
+    }
+    printf("parent key is %d\n", parent->key);
+
+    if(key_value < parent->key){
+        parent->left= p;
+    }
+    else
+        parent->right = p;
+    //else{
+    //    parent->right= p;
+    //}
 }
 
 void insert_bstree(BSTree tree, int key_value){
@@ -97,11 +115,15 @@ int main(){
     root->right= NULL;
 
     for(int i =1;i<tree_len;i++){
-       // insert_bstree(root, arr[i]);
-       insert_bstree_test(root, arr[i]);
+       //insert_bstree(root, arr[i]);
+       //insert_bstree_test(root, arr[i]);
+       insert_bstree_recursion(root, arr[i]);
+       printf("====\n");
     }
 
-    printf("====\n");
+    //insert_bstree_test(root, 9);
+    //preoder_tree(root);
+    //printf("====\n");
     preoder_tree(root);
     return 0;
 }

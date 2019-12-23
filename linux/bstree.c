@@ -104,6 +104,55 @@ void insert_bstree(BSTree tree, int key_value){
 }
 
 
+BSTree bstree_search(BSTree x, int k){
+    if(x == NULL||x->key == k){
+        return x;
+    }
+    if(x < x->left){
+        bstree_search(x->left, k);
+    }
+    else{
+        bstree_search(x->right, k);
+    }
+}
+
+BSTree bstree_search_parent(BSTree x, int k){
+    BSTree parent;
+    while(1){
+        if(k > x->key){
+            x = x->right;
+        }
+        else if(k < x->key){
+            x = x->left;
+        }
+        else if(k == x->key){
+            return k;
+        }
+
+    }
+}
+
+
+BSTree bstree_search_successor_parent(BSTree pnode, BSTree node){
+    while(1){
+        if(node->left == NULL){
+            pnode = node;
+            pnode = pnode->left;
+        }
+    }
+    return pnode;
+}
+
+
+void delete_bstree(BSTree tree, int k){
+    BSTree z;
+    z = bstree_search(tree, k);
+    if(z->left == NULL, z->right ==NULL){
+        free(z);
+    }
+}
+
+
 
 int main(){
     int tree_len;

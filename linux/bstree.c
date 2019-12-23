@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 
+
 typedef struct BSTreeNode{
     int key;
     struct BSTreeNode *left;
@@ -104,33 +105,19 @@ void insert_bstree(BSTree tree, int key_value){
 }
 
 
-BSTree bstree_search(BSTree x, int k){
+BSTree bstree_search(BSTree x, int k, BSTree p){
     if(x == NULL||x->key == k){
         return x;
     }
+    p = x;
     if(x < x->left){
-        bstree_search(x->left, k);
+        bstree_search(x->left, k, p);
     }
     else{
-        bstree_search(x->right, k);
+        bstree_search(x->right, k, p);
     }
 }
 
-BSTree bstree_search_parent(BSTree x, int k){
-    BSTree parent;
-    while(1){
-        if(k > x->key){
-            x = x->right;
-        }
-        else if(k < x->key){
-            x = x->left;
-        }
-        else if(k == x->key){
-            return k;
-        }
-
-    }
-}
 
 
 BSTree bstree_search_successor_parent(BSTree pnode, BSTree node){
@@ -144,11 +131,33 @@ BSTree bstree_search_successor_parent(BSTree pnode, BSTree node){
 }
 
 
-void delete_bstree(BSTree tree, int k){
-    BSTree z;
-    z = bstree_search(tree, k);
+int delete_bstree(BSTree tree, int k){
+    if (!tree){
+        return 0;
+    }
+
+    BSTree z, parent;
+    z = bstree_search(tree, k, parent);
     if(z->left == NULL, z->right ==NULL){
+        parent->left = parent->right =NULL;
         free(z);
+    }
+
+    if(z->left == NULL && z->right != NULL){
+        if(parent->left == z){
+            parent->left = z->right;
+        }
+        else{
+            parent->right = z->right;
+        }
+    }
+    else if(z->right == NULL && z->left!= NULL){
+        if(parent->left == z){
+            parent->left = z->right;
+        }
+        else{
+            parent->right = z->right;
+        }
     }
 }
 

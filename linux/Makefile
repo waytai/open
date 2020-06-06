@@ -1,5 +1,6 @@
-pip:pip.o
-	gcc -o pip pip.c
+graph_list:graph_list.o
+	gcc -o graph_list graph_list.c
+
 
 clean:
-	rm pip
+	rm graph_list *.o
